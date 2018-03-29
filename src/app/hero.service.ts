@@ -40,7 +40,7 @@ export class HeroService {
       'email': 'xxx@xxx.com',
       'secret': '123456',
     }}).pipe(
-	    tap(_ => this.messageService.addMessage(`fetched hero id=${id}`)),
+	    tap(_ => console.log(`fetched hero id=${id}`)),
 	    catchError(this.handleError<Hero>(`getHero id=${id}`))
 	  );
 /*  	this.log(`fetched hero id=${id}` );
@@ -87,29 +87,43 @@ export class HeroService {
               );
   }
 
+  searchHeroes(term: String): Observable<Hero[]> {
+    if(!term.trim()){
+      return of([])
+    }
+    return this.http.get<Hero[]>(`${this.heroesUrl}?name=${term}`, {headers :{
+      'email': 'xxx@xxx.com',
+      'secret': '123456',
+    }}).pipe(
+              tap(heroes => this.log(`fetched heroes ${heroes.length}`)),
+              catchError(this.handleError('getHeroes--', []))
+            );
+  }
+
+
   /** Log a HeroService message with the MessageService */
 	private log(message: string) {
+    console.log(`HeroService: ${message}`);
 	  this.messageService.addMessage(`HeroService: ${message}`);
 	}
 
 	/**
- * Handle Http operation that failed.
- * Let the app continue.
- * @param operation - name of the operation that failed
- * @param result - optional value to return as the observable result
- */
-private handleError<T> (operation = 'operation', result?: T) {
-  return (error: any): Observable<T> => {
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
-    // TODO: send the error to remote logging infrastructure
-    console.error(error); // log to console instead
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
 
-    // TODO: better job of transforming error for user consumption
-    this.log(`${operation} failed: ${error.message}`);
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
 
-    // Let the app keep running by returning an empty result.
-    return of(result as T);
-  };
-}
-
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 }

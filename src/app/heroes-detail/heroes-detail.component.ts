@@ -29,11 +29,9 @@ export class HeroesDetailComponent implements OnInit {
 
   getHero(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(`Hero to be searched ${JSON.stringify(id)}`)
     if(id)
       this.heroService.getHero(id)
         .subscribe(hero => {
-          console.log(`Hero -> ${JSON.stringify(hero)}`);
           if(hero) this.hero = hero;
         });
   }
@@ -43,19 +41,10 @@ export class HeroesDetailComponent implements OnInit {
   }
 
   save(): void {
-    console.log(`Updating -> ${JSON.stringify(this.hero)}`)
     this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
   }
 
   deleteHero() : void {
     this.heroService.deleteHero(this.hero).subscribe(() => this.goBack());
   }
-
-  // This component makes a request but it can't actually delete a hero.
-	//deleteRequest = new EventEmitter<Hero>();
-/*
-	delete() {
-  	this.deleteRequest.emit(this.hero);
-	}
-*/
 }

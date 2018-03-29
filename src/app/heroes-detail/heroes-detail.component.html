@@ -1,15 +1,24 @@
-<div *ngIf="hero">
-	<div >
-    <h2>Héroe seleccionado: {{hero.name}}</h2>
-    <h3>{{ hero.name | uppercase }} Details</h3>
-    <div><span>id: </span>{{hero._id}}</div>
+<div *ngIf="hero" class="container">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <h1>Details</h1>
+        <h2><small>Name:</small> {{ hero.name | uppercase }}</h2>
+        <h3><small>Hero Id:</small> {{hero._id}}</h3>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel">
+        <div class="row">
+          <label>name:
+            <input [(ngModel)]="hero.name" placeholder="name">
+          </label>
+        </div>
+        <div class="row">
+          <button (click)="goBack()" class="btn btn-outline-primary"><i class="far fa-arrow-alt-circle-left"></i>Back</button>
+          <button (click)="save()" class="btn btn-outline-success"><i class="far fa-save"></i>Save</button>
+          <button (click)="deleteHero()" class="btn btn-outline-warning"><i class="far fa-trash-alt"></i>Delete</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="hero.name" placeholder="name">
-    </label>
-  </div>
-  <button (click)="goBack()"><i class="far fa-arrow-alt-circle-left"></i>Back</button>
-  <button (click)="save()"><i class="far fa-save"></i>Save</button>
-  <button (click)="deleteHero()"><i class="far fa-trash-alt"></i>Delete</button>
-</div>

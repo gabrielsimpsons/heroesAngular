@@ -1,20 +1,27 @@
-<div>
-  <ul class="heroes">
-  <li *ngFor="let hero of heroes">
-    <a routerLink="/detail/{{hero._id}}">
-      <!-- <span class="badge">{{hero._id}}</span> --> {{hero.name}}
-    </a>
-  </li>
-</ul>
-  <div class="module hero">
-    <label>Hero name:
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <ul class="list-group">
+        <li *ngFor="let hero of heroes; index as i" class="list-group-item">
+          <a routerLink="/detail/{{hero._id}}">
+          <h4><span class="badge badge-pill badge-default">{{i +1}}</span> {{hero.name}}</h4>
+        </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Hero name</label>
+        <input #heroName class="form-control" aria-describedby="emailHelp" placeholder="Enter hero name">
+        <small class="form-text text-muted">Never forgot us</small>
+        <!-- <label>Hero name:
       <input #heroName />
-    </label>
-    <!-- (click) passes input value to add() and then clears the input -->
-
-    <button (click)="add(heroName.value); heroName.value=''">
-      <i class="far fa-save"></i>
-      add
-    </button>
+    </label> -->
+        <!-- (click) passes input value to add() and then clears the input -->
+        <button (click)="add(heroName.value); heroName.value=''" class="btn btn-success">
+          <i class="far fa-save"></i> add
+        </button>
+      </div>
+    </div>
   </div>
 </div>

@@ -19,10 +19,9 @@ export class DashboardComponent implements OnInit {
   }
 
   getHeroes(): void {
-  	this.messageService.addMessage('Obteniendo héroes')
   	this.heroService.getHeroes().subscribe(heroes => {
       this.heroes = heroes;
-      this.messageService.addMessage(`Héroes obtenidos -> ${JSON.stringify(this.heroes)}`);
+      console.log(`Héroes obtenidos -> ${JSON.stringify(this.heroes)}`);
     });
   }
 

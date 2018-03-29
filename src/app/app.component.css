@@ -27,3 +27,4 @@ nav a:hover {
 nav a.active {
   color: #039be5;
 }
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

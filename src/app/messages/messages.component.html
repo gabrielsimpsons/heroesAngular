@@ -1,6 +1,13 @@
-<div *ngIf="messageService.messages.length">
-	<h2>Mensajes</h2>
-	<button class="clear"
-					(click)="messageService.clear()"><i class="fas fa-trash-alt"></i>Limpiar</button>
-	<div *ngFor="let message of messageService.messages"> {{message}}</div>
+<div *ngIf="messageService.messages.length" class="container">
+
+	<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#collapseMessages">Mensajes</button>
+	
+	<div  class="collapse" id="collapseMessages">
+		<h1>hol</h1>
+		<ul class="list-group">
+			<li class="list-group-item">hola</li>
+			<li *ngFor="let message of messageService.messages" class="list-group-item">{{message}}</li>
+		</ul>
+	</div>
+	<!-- <div *ngFor="let message of messageService.messages" class="alert alert-primary"> {{message}}</div> -->
 </div>
